@@ -6,21 +6,21 @@ namespace HelloWorld
     {
         static void Main(string[] args)
         {
-            static int Factorial(int x)
+
+            linearSearch(new int[] {1, 2, 3, 4, 5, 6, 7, 8, 9, 10 }, 9);
+
+            int linearSearch(int[] array, int elementToSearch)
             {
-                if (x == 0)
+                for(int i = 0; i < array.Length; i++)
                 {
-                    return 1;
+                    if(array[i] == elementToSearch)
+                    {
+                        Console.WriteLine(i);
+                        return i;
+                    }
                 }
-                else
-                {
-                    return x * Factorial(x - 1);
-                }
+                return -1;
             }
-
-            int result = Factorial(5);
-
-            Console.WriteLine(result);
         }
     }
 }
