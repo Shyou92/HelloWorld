@@ -6,21 +6,66 @@ namespace HelloWorld
     {
         static void Main(string[] args)
         {
+            int[] arr = { 5, 9, 1, 10, 7, 3, 8, 2, 6, 4 };
 
-            linearSearch(new int[] {1, 2, 3, 4, 5, 6, 7, 8, 9, 10 }, 9); // O(n)
-
-            int linearSearch(int[] array, int elementToSearch)
+            static int[] sort(int[] arr)
             {
-                for(int i = 0; i < array.Length; i++)
+                int length = arr.Length;
+
+                for(int i = 0; i < length; i++)
                 {
-                    if(array[i] == elementToSearch)
+                    int current = arr[i];
+                    int j = i;
+
+                    while(j > 0 && arr[j - 1] > current)
                     {
-                        Console.WriteLine(i);
-                        return i;
+                        arr[j] = arr[j - 1];
+                        j--;
+                    }
+
+                    arr[j] = current;
+                }
+
+                return arr;
+            }
+
+            int[] result = sort(arr);
+
+            for(int i = 0; i < result.Length; i++)
+            {
+                Console.WriteLine(result[i]);
+            }
+
+            static int search(int[]arr, int elem)
+            {
+                var min = 0;
+                var max = arr.Length;
+
+                while(true)
+                {
+                    if(max - min == 1)
+                    {
+                        if(arr[min].CompareTo(elem) == 0)
+                            return min;
+                        if (arr[max].CompareTo(elem) == 0)
+                            return max;
+                        return -1;
+                    } 
+                    else
+                    {
+                        var middle = min + (max - min) / 2;
+                        var comparisonResult = arr[middle].CompareTo(elem);
+                        if(comparisonResult == 0)
+                            return middle;
+                        if (comparisonResult < 0)
+                            min = middle;
+                        if (comparisonResult > 0)
+                            max = middle;
                     }
                 }
-                return -1;
             }
+
+            Console.WriteLine( $"My current position in array list is {search(result, 8)}");
         }
     }
 }
